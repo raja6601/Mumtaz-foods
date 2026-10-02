@@ -1,0 +1,6 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { MessageSquareQuote } from "lucide-react";
+import { PageHeading } from "@/components/page-heading";
+
+export const Route = createFileRoute("/reviews")({ head: () => ({ meta: [{ title: "Reviews — Mumtaz Foods" }, { name: "description", content: "Customer reviews for Mumtaz Foods in Rawalpindi." }, { property: "og:title", content: "Mumtaz Foods Reviews" }, { property: "og:description", content: "Customer feedback for Mumtaz Foods." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: ReviewsPage });
+function ReviewsPage(){return <><PageHeading eyebrow="Reviews" title="What guests say"/><section className="grid min-h-80 place-items-center px-4 text-center"><div><MessageSquareQuote className="mx-auto size-10 text-muted-foreground"/><h2 className="mt-4 text-2xl">No reviews published yet</h2><p className="mt-2 text-muted-foreground">Verified customer reviews will appear here.</p></div></section></>}

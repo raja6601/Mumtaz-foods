@@ -1,0 +1,8 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
+import { Image as ImageIcon } from "lucide-react";
+import { PageHeading } from "@/components/page-heading";
+import { siteQueryOptions } from "@/lib/site-query";
+
+export const Route = createFileRoute("/gallery")({ loader: ({ context }) => context.queryClient.ensureQueryData(siteQueryOptions()), head: () => ({ meta: [{ title: "Gallery — Mumtaz Foods" }, { name: "description", content: "View food and restaurant photos from Mumtaz Foods." }, { property: "og:title", content: "Mumtaz Foods Gallery" }, { property: "og:description", content: "Food and restaurant photos from Mumtaz Foods in Rawalpindi." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: GalleryPage });
+function GalleryPage(){const {data}=useSuspenseQuery(siteQueryOptions());return <><PageHeading eyebrow="Gallery" title="Food & restaurant"/>{data.gallery.length?<section className="mx-auto grid max-w-7xl gap-4 px-4 py-14 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">{data.gallery.map(image=><figure key={image.id} className="overflow-hidden rounded-lg bg-card"><img src={image.image_url} alt={image.caption??"Mumtaz Foods"} className="aspect-square w-full object-cover"/><figcaption className="p-3 text-sm text-muted-foreground">{image.caption}</figcaption></figure>)}</section>:<section className="grid min-h-80 place-items-center px-4 text-center"><div><ImageIcon className="mx-auto size-10 text-muted-foreground"/><h2 className="mt-4 text-2xl">Gallery coming soon</h2><p className="mt-2 text-muted-foreground">Restaurant photos will appear here.</p></div></section>}</>}
